@@ -1,4 +1,4 @@
-# Monfil-Lab-Analysis
+# Monfils-Lab-Analysis
 ## Overview
 
 If you have not labeled the videos yet, please follow these steps listed here: [Write Up](https://docs.google.com/document/d/1Wt5_wa7j12gE9fzmw9T9nHWQkvUncxSEwznl5go_s2M/edit?usp=sharing).<br />
