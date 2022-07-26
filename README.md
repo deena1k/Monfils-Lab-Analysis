@@ -1,9 +1,9 @@
 # Monfil-Lab-Analysis
 ## Overview
 
-If you have not labeled the videos yet, please follow these steps listed here: [Write Up](https://github.com/deena1k/Monfil-Lab-Analysis/blob/main/DeepLabCut%20Write%20Up%20(Monfils%20Lab).pdf).
-Contains the code for running the analysis on the tracked Rat videos (using DEEPLABCUT)
-The last thing for you to do in the write-up is run the python file! You can find it in this respiratory, titled "getting_values.py". Make sure that when you download the file you place it in the same directory as the csv file that you downloaded from the video you analyzed in DEEPLABCUT. 
+If you have not labeled the videos yet, please follow these steps listed here: [Write Up](https://github.com/deena1k/Monfil-Lab-Analysis/blob/main/DeepLabCut%20Write%20Up%20(Monfils%20Lab).pdf).<br />
+
+The last thing for you to do in the write-up is run the python file which calculates the average velocity, distance, and amount of interactions between each rat! You can find it in this respiratory, titled "getting_values.py". Make sure that when you download the file you place it in the same directory as the csv file that you downloaded from the video you analyzed in DEEPLABCUT. 
 
 The program will ask you a few questions about the file that you’re entering and the conversion scales, so answer those appropriately (you don’t need to put your answer in quotation marks because the program will already do that). 
 
