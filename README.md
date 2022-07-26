@@ -4,6 +4,7 @@ The last thing for you to do in the write-up is run the python file! You can fin
 
 The program will ask you a few questions about the file that you’re entering and the conversion scales, so answer those appropriately (you don’t need to put your answer in quotation marks because the program will already do that). 
 
+
 These are the questions you will be asked:
 
 “What is the file name of the csv file you want to input? Ex: Video17.csv”. → Enter the name of the csv file of the video that you want to look at.
