@@ -42,12 +42,7 @@ for i in range(0,len(title_names)):
 
 #60 frames in a second (if nan for  30 frames or more then we do distance formula )
 
-#how many seconds for velocity?
-#so bin it 
-#20 seconds 
-#60.06 fps tech but using 60 frames
-
-#20 seconds is therefore --> 1200 frames
+#binning velocity every 20 seconds
 
 
 pixels_to_inches=float(input("How many pixels are in an inch (according to ImageJ)? Ex: 22.75 "))
@@ -141,6 +136,9 @@ print(rats_distance)
 
 interactions={}
 
+
+distance_between_rats_every_second={}
+
 #now need to see how long and which rats are in contact with each other
 #possible combinations: rat1+rat2, rat1+3, rat2+rat3 for ex
 #do I want to see when they're interaction potentially?
@@ -161,9 +159,12 @@ for i in range(1,len(dictionary_of_index)+1):
         value2=dictionary_of_index["rat "+str(l)]
         second_column_x= all_data.iloc[:,value2]
         second_column_y =all_data.iloc[:,value2+1]
-        
+        #frames counter for seeing distance of rats at every second
+        frames=0
+        rats=[]
         #looking at every frame after first rat goes in
         for data in range(frame,len(all_data)):
+            frames+=1
             first_rat_x=float(first_column_x[data])
             first_rat_y=float(first_column_y[data])
             
@@ -173,6 +174,11 @@ for i in range(1,len(dictionary_of_index)+1):
             #if we have both x and y coordinates for both rats
             if (not pd.isna(first_rat_x)) and (not pd.isna(first_rat_y)) and (not pd.isna(second_rat_x)) and (not pd.isna(second_rat_y)):
                 distance= (math.sqrt(((first_rat_x-second_rat_x)/pixels_to_inches)**2+((first_rat_y-second_rat_y)/pixels_to_inches)**2))
+                #check if 60 frames have passes
+                if frames>=60:
+                    seconds_passed=int(frames/60)
+                    rats.append("Rats are "+str(distance)+" at "+str(seconds_passed))
+                    
               #if distance less than 5 inches
                 if distance<=5:
                     friend_score+=1
@@ -185,17 +191,12 @@ for i in range(1,len(dictionary_of_index)+1):
                 friend_score+=1
                 
         interactions["rat "+str(i)+" and rat "+str(l)+ " Interactions (Total seconds)"]= friend_score/60
+        distance_between_rats_every_second["rat "+str(i)+" and rat "+str(l)+ " distance"]=rats
 print("-------------")
 print(interactions)
+print("---------------------")
 
+print("Distance between rats at every second. Note that this excludes out of frames")
+print(distance_between_rats_every_second)
             
-                  
-
-
-#CONVERSION: 22.75 pixels/inch (according to ImageJ)
-
-
-
-
-    
 
