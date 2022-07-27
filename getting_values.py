@@ -141,7 +141,6 @@ distance_between_rats_every_second={}
 
 #now need to see how long and which rats are in contact with each other
 #possible combinations: rat1+rat2, rat1+3, rat2+rat3 for ex
-#do I want to see when they're interaction potentially?
 
 #first two for loops allow every possible combo of rats to occur
 
