@@ -42,21 +42,21 @@ for i in range(0,len(title_names)):
 
 
 
-#60 frames in a second (if nan for  30 frames or more then we do distance formula )
+#fps frames in a second (if nan for  30 frames or more then we do distance formula )
 
 #binning velocity every 20 seconds
 
 
 pixels_to_inches=float(input("How many pixels are in an inch (according to ImageJ)? Ex: 22.75 "))
-frame=int(input("What second do you want to start the analysis at? Ex: 25 "))
+second=int(input("What second do you want to start the analysis at? Ex: 25 "))
 
 name=input("What would you like to call the velocity and total distance file? Please inlcude .csv at the end of the name. ")
 name2=input("What would you like to call the interaction data file? Please inlcude .csv at the end of the name. ")
-
+fps=int(input("What is the fps of the video? Make sure this is a whole number. "))
 #add 3 because the first index of the csv spreadhsheets
 #say the rat number, the body part, and then either x/y/likelihood
-#multiply by 60 because 60 frames per second
-frame=frame*60+3
+#multiply by fps because frames per second
+frame=second*fps+3
 
 
 
@@ -120,9 +120,9 @@ for r in dictionary_of_index:
             distance= (math.sqrt((current_x_value-old_x_value)**2+(current_y_value-old_y_value)**2))/pixels_to_inches
             total_distance+=distance
         
-        #if 20 seconds have passed. THIS IS ASSUMING A 60 FRAME VIDEO
+        #if 20 seconds have passed.
         frames_passed+=1
-        if frames_passed>=1200:
+        if frames_passed>=fps*20:
             frames_passed=0
             
             #NOTE: THESE TWO COMMENTED OUT LINES ARE IF YOU WANT SPEED CALC, NOT VELOCITY
@@ -201,14 +201,14 @@ for i in range(1,len(dictionary_of_index)+1):
             second_rat_x= float(second_column_x[data])
             second_rat_y =float(second_column_y[data])
             
-            seconds_passed=int(frames/60)
+            seconds_passed=int(frames/fps)
             #if we have both x and y coordinates for both rats
             if (not pd.isna(first_rat_x)) and (not pd.isna(first_rat_y)) and (not pd.isna(second_rat_x)) and (not pd.isna(second_rat_y)):
-                #check if 60 frames have passes
-                if (frames>=60 and frames%60==0) or (frames>=60 and seconds_passed not in seconds):
+                #check if fps frames have passes
+                if (frames>=fps and frames%fps==0) or (frames>=fps and seconds_passed not in seconds):
                     #only calculating distance every second
                     distance= (math.sqrt(((first_rat_x-second_rat_x)/pixels_to_inches)**2+((first_rat_y-second_rat_y)/pixels_to_inches)**2))
-                    seconds_passed=int(frames/60)
+                    seconds_passed=int(frames/fps)
                     seconds.append(seconds_passed)
                     rats.append("Rats are "+str(distance)+" at "+str(seconds_passed)+ " s")
                     
@@ -224,13 +224,13 @@ for i in range(1,len(dictionary_of_index)+1):
                 friend_score+=1
                 #adding blank to list of interactions
             
-            if counter>=60 and seconds_passed not in seconds:
+            if counter>=fps and seconds_passed not in seconds:
                 rats.append(pd.NA)
                 counter=0
                 seconds.append(seconds_passed)
 
                 
-        interactions["rat "+str(i)+" and rat "+str(l)]= f"{friend_score/60} s of interaction"
+        interactions["rat "+str(i)+" and rat "+str(l)]= f"{friend_score/fps} s of interaction"
         distance_between_rats_every_second["rat "+str(i)+" and rat "+str(l)]=rats
 
 #this is used to converts to csv files!
@@ -250,3 +250,4 @@ for b in distance_between_rats_every_second.keys():
 data2=distance_between_rats_every_second
 info=pd.DataFrame(data2)
 info.to_csv(name2, encoding='utf-8', index=False)
+
