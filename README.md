@@ -20,6 +20,8 @@ These are the questions you will be asked:
 
 5. "What would you like to call the interaction data file? Please inlcude .csv at the end of the name." → Enter the name that you would like to call the file that contains all of the interaction data. An example would be “interactions.csv”. This will appear in whatever folder you’re currently located in (so wherever your getting_values.py file is located). 
 
+6. "What is the fps of the video? Make sure this is a whole number." → Enter the fps (frames per second) of the video, making sure to enter a whole number. You can find the fps by looking at the details for the labeled video. 
+
 Once you enter these you should get two csv files located in the directory that getting_vales.py is in!
 
 
